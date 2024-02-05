@@ -18,6 +18,10 @@ public class Optionals {
         Optional<Integer> value = Optional.of(a[2]);
 
         System.out.println(value.get());
+
+
+
+
     }
 }
 

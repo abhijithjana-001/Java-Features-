@@ -269,3 +269,38 @@ class Test {
 ```
 25
 ```
+
+## 9.StringJoiner
+StringJoiner is a new class added in Java 8 under java.util package.
+
+Simply put, it can be used for joining Strings making use of a delimiter, prefix, and suffix.
+
+```java
+import java.util.StringJoiner;
+
+/**
+ * it can be used for joining Strings making use of a delimiter, prefix, and suffix.
+ */
+public class StringJoiners {
+    public static void main(String[] args) {
+        StringJoiner stringJoiner=new StringJoiner(",");
+//        We can add Strings using the add() method:
+        stringJoiner.add("Red")
+                .add("Green")
+                .add("Blue");
+
+
+        System.out.println(stringJoiner);
+    }
+}
+```
+
+### output
+```
+Red,Green,Blue
+```
+
+
+
+
+    
