@@ -269,8 +269,94 @@ class Test {
 ```
 25
 ```
+## 9.BiFunction Interface
+The BiFunction Interface is a part of the java.util.function package which has been introduced since Java 8, to implement functional programming in Java. It represents a function which takes in two arguments and produces a result. Hence, this functional interface which takes in 3 parameters namely:-
+* T: denotes the type of the first argument to the function
+* U: denotes the type of the second argument to the function
+* R: denotes the return type of the function
 
-## 9.StringJoiner
+The BiFunction interface consists of the following two functions:
+
+### 1. apply()
+This method applies the given function to the arguments.
+
+Syntax:
+```
+R apply(T t, U u)
+```
+Parameters: This method takes two parameters:
+* t– the first function argument
+* u– the second function argument
+
+Returns: This method returns the function result which is of type R. Below is the code to illustrate apply() method:
+
+```java
+// Java Program to demonstrate
+// BiFunction's apply() method
+
+import java.util.function.BiFunction;
+
+public class Main {
+	public static void main(String args[])
+	{
+		// BiFunction to add 2 numbers
+		BiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;
+
+		// Implement add using apply()
+		System.out.println("Sum = " + add.apply(2, 3));
+
+		// BiFunction to multiply 2 numbers
+		BiFunction<Integer, Integer, Integer> multiply = (a, b) -> a * b;
+
+		// Implement add using apply()
+		System.out.println("Product = " + multiply.apply(2, 3));
+	}
+}
+
+```
+
+### output
+```
+Sum = 5
+Product = 6
+```
+### 2. addThen()
+It returns a composed function. It means the method first applies this function and then applies the after function. If the assessment of either function throws an exception, it is relayed to the caller of the composed function.
+
+syntax 
+```
+default <V> BiFunction<T,U,V> andThen(Function<? super R,? extends V> after)  
+```
+Type-Parameter:
+* V: It represents the type of the output of the after() function, and of the composed function.
+* after: It applies after this function.
+  Returns:
+
+It returns a composed function. It means the method first applies this function and then applies the after function.
+
+```java
+import java.util.function.BiFunction;  
+import java.util.function.Function;  
+public class BiFunctionAndThenExample  
+{  
+public static void main(String args[])   
+{  
+//performs multiplication       
+BiFunction <Integer, Integer, Integer> bfobj = (a, b) -> a * b;  
+//performs division  
+Function <Integer, Integer> fobj = (c) -> c / 2;  
+//composed function  
+System.out.println("The result is: " + bfobj.andThen(fobj).apply(70, 10));  
+}  
+}  
+```
+### output
+```
+The result is: 350
+```
+
+
+## 10.StringJoiner
 StringJoiner is a new class added in Java 8 under java.util package.
 
 Simply put, it can be used for joining Strings making use of a delimiter, prefix, and suffix.
