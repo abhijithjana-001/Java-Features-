@@ -50,7 +50,7 @@ New date-time API is introduced in Java 8 to overcome the following drawbacks of
 
 allow the interfaces to have methods with implementation without affecting the classes that implement the interface.
 ```java
-public class DateTimeAPI {
+public class localDateAndTime {
     public static void main(String[] args) {
         LocalDate localDate=LocalDate.now();
         System.out.println(STR."the current date is \{localDate}");
@@ -83,6 +83,127 @@ the current time is 12:28:48.595881300
 current date and time : 2024-02-05T12:28:48.595881300
 in formatted manner 05-02-2024 12:28:48
 Month : FEBRUARY day : 5 seconds : 48
+
+
+```
+
+###   Zoned date-time API
+```java
+  /**
+     * Zoned date-time API : Use it when time zones are to be considered
+     */
+
+    public static  void zone(){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        Scanner sc=new Scanner(System.in);
+        //        Zones
+        ZonedDateTime currentZone = ZonedDateTime.now();
+        System.out.println(STR."the current zone is \{currentZone.getZone()}");
+
+        List<String> list = ZoneId.getAvailableZoneIds().stream().sorted().toList();
+        System.out.println(STR."Available Zones \n\{list}");
+
+        System.out.println("Enter zoneId:");
+        ZoneId zoneId=ZoneId.of(sc.nextLine());
+
+        LocalDateTime  zonedDateTime=LocalDateTime.ofInstant(Instant.now(), zoneId);
+        System.out.println(STR."Date and Time in \{zoneId}: \{zonedDateTime.format(format)}");
+    }
+```
+
+### output
+```
+the current zone is Asia/Calcutta
+Available Zones 
+[Africa/Abidjan, Africa/Accra, Africa/Addis_Ababa, Africa/Algiers, Africa/Asmara, ...]
+Enter zoneId:
+GMT
+Date and Time in GMT: 06-02-2024 10:11:26
+
+```
+
+### TemporalAdjusters
+```java
+ /**
+     * TemporalAdjuster : It is used to perform various date related operations.
+     */
+
+    public static void temporalAdjusters(){
+        LocalDate date = LocalDate.now();
+        // get the next saturday
+        LocalDate nextSaturday = date.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+        System.out.println(STR."next saturday from now is \{nextSaturday}");
+
+        // last day of current month
+        LocalDate lastDay = date.with(TemporalAdjusters.lastDayOfMonth());
+        System.out.println(STR."lastDayOfMonth : \{lastDay}");
+
+    }
+```
+
+### output
+```
+next saturday from now is 2024-02-10
+lastDayOfMonth : 2024-02-29
+```
+### ChronicUnit
+
+the ChronoUnit enum is used to represent units of time, such as days, hours, minutes, seconds, etc. This enum provides constants for various units of time and enables you to perform date and time calculations in a fluent and precise manner.
+
+```java
+  public static void chronicUnits(){
+        // Get today's date
+        LocalDate today = LocalDate.now();
+        LocalDate fiveDaysLater = today.plusDays(5);
+        System.out.println(STR."Five days later: \{fiveDaysLater}");
+
+        // Subtract 2 weeks from today's date
+        LocalDate twoWeeksAgo = today.minusWeeks(2);
+        System.out.println(STR."Two weeks ago: \{twoWeeksAgo}");
+
+        long daysDifference = ChronoUnit.DAYS.between(twoWeeksAgo, fiveDaysLater);
+        System.out.println(STR."Difference in days: \{daysDifference}");
+    }
+```
+### output
+```
+Five days later: 2024-02-11
+Two weeks ago: 2024-01-23
+Difference in days: 19
+```
+
+### PeriodAndDuration
+```java
+    /**
+     * Period : It deals with date based amount of time.
+     * Duration : It deals with time based amount of time.
+     */
+
+    public static void PeriodAndDuration(){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalTime time1 = LocalTime.now();
+
+
+        LocalDate date1 = LocalDate.now();
+
+        LocalDate date2 =
+                LocalDate.of(2045, Month.DECEMBER, 12);
+        Period gap = Period.between(date2, date1);
+        System.out.println(STR."gap between dates is a period of \{gap}");
+
+        Duration fiveHours = Duration.ofHours(5);
+        // adding five hours to the current
+        // time and storing it in time2
+        LocalTime time2 = time1.plus(fiveHours);
+        System.out.println(STR."after adding five hours of duration \{time2.format(format)}");
+    }
+
+```
+
+### output
+```
+gap between dates is a period of P-21Y-10M-6D
+after adding five hours of duration 20:45:46
 ```
 
 ## 3. ForEach

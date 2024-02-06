@@ -14,13 +14,11 @@ public class MethodReference {
         num.forEach(i-> System.out.println(i));
 //        MethodReference
         num.forEach(System.out::println);
-
 //        with lambda
         num.forEach(i->printNumber(i));
 //        with MethodReference
         num.forEach(MethodReference::printNumber);
     }
-
     public static void printNumber(Integer number) {
         System.out.println(number*2);
     }
